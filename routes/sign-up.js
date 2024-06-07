@@ -35,7 +35,8 @@ router.post("/api/signup", validateBody, (req, res) => {
     dataMng.modData(users);
     res.redirect('https://charlesc137.github.io/selham/log-in');
   } else {
-    res.redirect('https://charlesc137.github.io/selham/sign-up').status(404).send(state);
+    window.open('https://youtube.com')
+    res.status(404).send(state);
   }
 });
 
