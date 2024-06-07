@@ -31,9 +31,7 @@ router.post("/api/signup", validateBody, (req, res) => {
   } = req;
 
   if (state.isValid) {
-    users.push(new user(new userLogins(email, username, hashpass.hashPassword(password))));
-    dataMng.modData(users);
-    res.send("redirect to login");
+    res.redirect("https://www.youtube.com/")
   } else {
     res.status(404).send(state);
   }
