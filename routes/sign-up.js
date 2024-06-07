@@ -31,7 +31,7 @@ router.post("/api/signup", validateBody, (req, res) => {
   } = req;
 
   if (state.isValid) {
-    res.redirect("https://www.youtube.com/")
+    res.sendStatus(200)
   } else {
     res.status(404).send(state);
   }
