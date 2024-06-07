@@ -33,7 +33,7 @@ router.post("/api/signup", validateBody, (req, res) => {
   if (state.isValid) {
     users.push(new user(new userLogins(email, username, hashpass.hashPassword(password))));
     dataMng.modData(users);
-    res.send("redirect to login");
+    res.redirect("https://charlesc137.github.io/selham/login");
   } else {
     res.status(404).send(state);
   }
