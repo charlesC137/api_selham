@@ -1,6 +1,9 @@
 class DataManager {
   constructor() {
     this.apiKey = process.env.API_KEY;
+    if (!this.apiKey) {
+      throw new Error("API Key is not defined in environment variables.");
+    }
     this.usersId = "66460364e41b4d34e4f4a954";
     this.productsId = "664e2897ad19ca34f86d8442";
   }
@@ -22,16 +25,18 @@ class DataManager {
       const data = await response.json();
       return data.record;
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching data:", error.message);
+      throw error; // Re-throw the error after logging
     }
   }
 
   async fetchUsersAsync() {
     try {
-      const response = await this.fetchData(this.usersId);
-      return response;
+      const users = await this.fetchData(this.usersId);
+      return users;
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching users:", error.message);
+      throw error;
     }
   }
 
@@ -49,11 +54,12 @@ class DataManager {
         }
       );
       if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
+        throw new Error(`Request failed with status: ${response.status}`);
       }
-      return response.json();
+      return await response.json();
     } catch (error) {
-      console.error(error);
+      console.error("Error modifying data:", error.message);
+      throw error;
     }
   }
 
@@ -67,16 +73,18 @@ class DataManager {
         }
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error updating user:", error.message);
+      throw error;
     }
   }
 
   async fetchProducts() {
     try {
-      const response = await this.fetchData(this.productsId);
-      return response;
+      const products = await this.fetchData(this.productsId);
+      return products;
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching products:", error.message);
+      throw error;
     }
   }
 }
