@@ -7,10 +7,7 @@ const logInRouter = require("./routes/log-in");
 
 const port = process.env.PORT || 3000;
 
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
+app.use(express.urlencoded({ extended: false }));
 app.use(signUpRouter);
 app.use(logInRouter);
 
