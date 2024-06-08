@@ -32,8 +32,7 @@ router.post("/api/signup", validateBody, (req, res) => {
 
   if (state.isValid) {
     users.push(new user(new userLogins(email, username, hashpass.hashPassword(password))));
-    dataMng.modData(users);
-    res.redirect('https://charlesc137.github.io/selham/log-in')
+    //dataMng.modData(users);
   } else {
     res.status(404).json(state);
   }
@@ -87,6 +86,7 @@ async function validateBody(req, res, next) {
   req.body.state = {
     isValid: req.isValid,
     errorMsg: req.errorMsg,
+    redirectUrl: 'https://charlesc137.github.io/selham/log-in'
   };
   next();
 }
