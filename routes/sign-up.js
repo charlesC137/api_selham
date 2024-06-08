@@ -81,7 +81,7 @@ async function validateBody(req, res, next) {
   }
 
   req.body.state = {
-    isValid: req.isValid,
+    isValid: `${req.isValid}`,
     errorMsg: req.errorMsg,
   };
   next();
