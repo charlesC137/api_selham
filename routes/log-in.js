@@ -79,7 +79,7 @@ async function validateBody(req, res, next) {
     users: req.users,
     signUpUrl: 'https://charlesc137.github.io/selham/sign-up',
     redirectUrl: 'https://charlesc137.github.io/selham/home',
-    activeUser = req.activeUser,
+    activeUser: req.activeUser,
   };
 
   next();
