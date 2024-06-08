@@ -38,6 +38,7 @@ async function validateBody(req, res, next) {
 
   req.isValid = false;
   req.errorMsg = '';
+  req.loggedUser = '';
 
   if (
     (emailRegex.test(userInput) || usernameRegex.test(userInput)) &&
@@ -54,6 +55,7 @@ async function validateBody(req, res, next) {
         ) {
           userInputState = true;
           if (hashpass.comparePassword(password, user.userLogins.password)) {
+            req.loggedUser = user;
             passwordState = true;
           }
         }
@@ -76,7 +78,8 @@ async function validateBody(req, res, next) {
     errorMsg: req.errorMsg,
     users: req.users,
     signUpUrl: 'https://charlesc137.github.io/selham/sign-up',
-    redirectUrl: 'https://charlesc137.github.io/selham/home'
+    redirectUrl: 'https://charlesc137.github.io/selham/home',
+    currentUser = req.loggedUser
   };
 
   next();
