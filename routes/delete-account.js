@@ -14,7 +14,7 @@ router.post("/api/delete", async (req, res) => {
 
   await dataMng.deleteAccount(username);
 
-  res.status(200);
+  res.send(200);
 });
 
 module.exports = router;
