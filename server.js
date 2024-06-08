@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const { createProxyMiddleware } = require('http-proxy-middleware')
 
 require("dotenv").config();
 const signUpRouter = require("./routes/sign-up");
