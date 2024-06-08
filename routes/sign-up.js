@@ -33,7 +33,7 @@ router.post("/api/signup", validateBody, (req, res) => {
   if (state.isValid) {
     res.sendStatus(200)
   } else {
-    res.status(404).send(JSON.stringify(state));
+    res.status(404).json(state);
   }
 });
 
@@ -81,7 +81,7 @@ async function validateBody(req, res, next) {
   }
 
   req.body.state = {
-    isValid: `${req.isValid}`,
+    isValid: req.isValid,
     errorMsg: req.errorMsg,
   };
   next();
