@@ -30,10 +30,10 @@ router.post("/api/signup", validateBody, (req, res) => {
     body: { email, username, password, state },
   } = req;
 
-  if (JSON.parse(state.isValid)) {
+  if (state.isValid) {
     res.sendStatus(200)
   } else {
-    res.status(404).send(state);
+    res.status(404).send(JSON.stringify(state));
   }
 });
 
@@ -80,10 +80,10 @@ async function validateBody(req, res, next) {
     req.errorMsg = "Invalid input";
   }
 
-  req.body.state = JSON.stringify({
+  req.body.state = {
     isValid: req.isValid,
     errorMsg: req.errorMsg,
-  });
+  };
   next();
 }
 
