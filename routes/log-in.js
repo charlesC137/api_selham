@@ -16,9 +16,9 @@ router.post("/api/login", validateBody, (req, res) => {
   } = req;
 
   if (state.isValid) {
-    res.send(state);
+    res.status(200).json(state);
   } else {
-    res.status(404).send(state);
+    res.status(404).json(state);
   }
 });
 
@@ -37,13 +37,14 @@ async function validateBody(req, res, next) {
   } = req;
 
   req.isValid = false;
+  req.errorMsg = '';
 
   if (
     (emailRegex.test(userInput) || usernameRegex.test(userInput)) &&
     passwordRegex.test(password)
   ) {
     if (users.length === 0) {
-      //res.send("redirect to login");
+      req.users = false
     } else {
       for (const user of users) {
         if (
@@ -72,6 +73,9 @@ async function validateBody(req, res, next) {
   req.body.state = {
     isValid: req.isValid,
     errorMsg: req.errorMsg,
+    users: req.users,
+    signUpUrl: 'https://charlesc137.github.io/selham/sign-up',
+    redirectUrl: 'https://charlesc137.github.io/selham/home'
   };
 
   next();
