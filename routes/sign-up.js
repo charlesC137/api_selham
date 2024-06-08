@@ -33,6 +33,7 @@ router.post("/api/signup", validateBody, (req, res) => {
   if (state.isValid) {
     users.push(new user(new userLogins(email, username, hashpass.hashPassword(password))));
     //dataMng.modData(users);
+    res.json(state).status(200)
   } else {
     res.status(404).json(state);
   }
