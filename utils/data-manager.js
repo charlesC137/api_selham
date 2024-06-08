@@ -63,8 +63,11 @@ class DataManager {
     }
   }
 
-  async updateUser(update, users) {
+  //can also use to update the user
+  async updateCart(update) {
     try {
+      const users = await this.fetchUsersAsync();
+      console.log(update)
       for (let user of users) {
         if (user.userLogins.username === update.userLogins.username) {
           user.cart = update.cart;
@@ -75,6 +78,24 @@ class DataManager {
     } catch (error) {
       console.error("Error updating user:", error.message);
       throw error;
+    }
+  }
+
+  async deleteAccount(username) {
+    try {
+      const users = await this.fetchUsersAsync();
+
+      for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+
+        if (username === user.userLogins.username) {
+          users.splice(i, 1);
+
+          await this.modData(users);
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
