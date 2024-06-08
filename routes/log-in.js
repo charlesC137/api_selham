@@ -44,8 +44,9 @@ async function validateBody(req, res, next) {
     passwordRegex.test(password)
   ) {
     if (users.length === 0) {
-      req.users = false
+      req.users = false;
     } else {
+      req.users = true;
       for (const user of users) {
         if (
           userInput === user.userLogins.email ||
