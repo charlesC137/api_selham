@@ -67,7 +67,6 @@ class DataManager {
   async updateCart(update) {
     try {
       const users = await this.fetchUsersAsync();
-      console.log(update)
       for (let user of users) {
         if (user.userLogins.username === update.userLogins.username) {
           user.cart = update.cart;
