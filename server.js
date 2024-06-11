@@ -57,7 +57,6 @@ app.listen(port);
 const makeGetRequest = async () => {
   try {
     const response = await axios.get("https://api-selham.onrender.com");
-    console.log(response.data);
   } catch (error) {
     console.error("Error making GET request:", error);
   }
