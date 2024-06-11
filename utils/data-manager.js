@@ -98,6 +98,24 @@ class DataManager {
     }
   }
 
+  async findUser(username) {
+    try {
+      const users = await this.fetchUsersAsync();
+
+      const matchedUser = users.find((user) => {
+        return user.userLogins.username === username;
+      });
+
+      if (matchedUser) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async fetchProducts() {
     try {
       const products = await this.fetchData(this.productsId);
