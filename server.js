@@ -11,6 +11,7 @@ const productsRouter = require("./routes/products");
 const deleteAcctRouter = require("./routes/delete-account");
 const updateCartRouter = require("./routes/update-cart");
 const userExistsRouter = require("./routes/user-exists");
+const fetchUserRouter = require("./routes/fetch-user");
 
 const port = process.env.PORT || 3000;
 
@@ -47,6 +48,7 @@ app.use(productsRouter);
 app.use(deleteAcctRouter);
 app.use(updateCartRouter);
 app.use(userExistsRouter);
+app.use(fetchUserRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json("OK");
