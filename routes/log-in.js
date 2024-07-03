@@ -37,8 +37,8 @@ async function validateBody(req, res, next) {
   } = req;
 
   req.isValid = false;
-  req.errorMsg = '';
-  req.activeUser = '';
+  req.errorMsg = "";
+  req.activeUser = "";
 
   if (
     (emailRegex.test(userInput) || usernameRegex.test(userInput)) &&
@@ -77,9 +77,9 @@ async function validateBody(req, res, next) {
     isValid: req.isValid,
     errorMsg: req.errorMsg,
     users: req.users,
-    signUpUrl: 'https://charlesc137.github.io/selham/sign-up',
-    redirectUrl: 'https://charlesc137.github.io/selham/home',
-    activeUser: req.activeUser,
+    signUpUrl: "https://charlesc137.github.io/selham/sign-up",
+    redirectUrl: "https://charlesc137.github.io/selham/home",
+    username: req.activeUser.userLogins.username,
   };
 
   next();
