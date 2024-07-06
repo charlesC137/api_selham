@@ -89,6 +89,7 @@ async function validateBody(req, res, next) {
   req.body.state = {
     isValid: req.isValid,
     errorMsg: req.errorMsg,
+    redirectUrl: "https://charlesc137.github.io/selham/log-in",
   };
   next();
 }
