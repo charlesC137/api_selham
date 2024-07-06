@@ -77,8 +77,6 @@ async function validateBody(req, res, next) {
     isValid: req.isValid,
     errorMsg: req.errorMsg,
     users: req.users,
-    signUpUrl: "https://charlesc137.github.io/selham/sign-up",
-    redirectUrl: "https://charlesc137.github.io/selham/home",
     username: req.activeUser.userLogins.username,
   };
 

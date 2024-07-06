@@ -31,9 +31,11 @@ router.post("/api/signup", validateBody, (req, res) => {
   } = req;
 
   if (state.isValid) {
-    users.push(new user(new userLogins(email, username, hashpass.hashPassword(password))));
+    users.push(
+      new user(new userLogins(email, username, hashpass.hashPassword(password)))
+    );
     dataMng.modData(users);
-    res.json(state).status(200)
+    res.json(state).status(200);
   } else {
     res.status(404).json(state);
   }
@@ -59,7 +61,7 @@ async function validateBody(req, res, next) {
   ) {
     if (users.length === 0) {
       req.isValid = true;
-      req.errorMsg = '';
+      req.errorMsg = "";
     } else {
       const emailCheck = users.find((user) => {
         return email === user.userLogins.email;
@@ -77,7 +79,7 @@ async function validateBody(req, res, next) {
         req.isValid = false;
       } else {
         req.isValid = true;
-        req.errorMsg = '';
+        req.errorMsg = "";
       }
     }
   } else {
@@ -87,7 +89,6 @@ async function validateBody(req, res, next) {
   req.body.state = {
     isValid: req.isValid,
     errorMsg: req.errorMsg,
-    redirectUrl: 'https://charlesc137.github.io/selham/log-in'
   };
   next();
 }
