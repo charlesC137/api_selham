@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 
-const routers = require("./routes/index");
+const routes = require("./routes/index");
 const axios = require("axios");
 
 const port = process.env.PORT || 3000;
@@ -40,7 +40,7 @@ mongoose
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(routers);
+app.use(routes);
 
 app.get("/", (req, res) => {
   res.status(200).json("OK");

@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   cart: [
     {
       quantity: { type: Number, required: true },
-      currentProduct: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+      currentProduct: { type: Object, required: true },
       deliveryOptionId: { type: String, required: true },
     },
   ],
