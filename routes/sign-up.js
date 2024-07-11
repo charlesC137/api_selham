@@ -4,8 +4,6 @@ const router = express.Router();
 const hashpass = require("../utils/password-methods");
 const dataMng = require("../utils/data-manager");
 
-let users;
-
 class user {
   constructor(userLogins) {
     this.userLogins = userLogins;
@@ -31,10 +29,11 @@ router.post("/api/signup", validateBody, (req, res) => {
   } = req;
 
   if (state.isValid) {
-    users.push(
-      new user(new userLogins(email, username, hashpass.hashPassword(password)))
+    const newUser = new user(
+      new userLogins(email, username, hashpass.hashPassword(password))
     );
-    dataMng.modData(users);
+
+    dataMng.createUser(newUser);
     res.json(state).status(200);
   } else {
     res.status(404).json(state);
@@ -42,7 +41,7 @@ router.post("/api/signup", validateBody, (req, res) => {
 });
 
 async function validateBody(req, res, next) {
-  users = await dataMng.fetchUsersAsync();
+  const users = await dataMng.fetchUsersAsync();
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const usernameRegex = /^\w+/;

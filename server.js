@@ -1,17 +1,11 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 
 require("dotenv").config();
 
+const routers = require("./routes/index");
 const axios = require("axios");
-
-const signUpRouter = require("./routes/sign-up");
-const logInRouter = require("./routes/log-in");
-const productsRouter = require("./routes/products");
-const deleteAcctRouter = require("./routes/delete-account");
-const updateCartRouter = require("./routes/update-cart");
-const userExistsRouter = require("./routes/user-exists");
-const fetchUserRouter = require("./routes/fetch-user");
 
 const port = process.env.PORT || 3000;
 
@@ -38,17 +32,15 @@ app.options("/api/*", (req, res) => {
   res.send();
 });
 
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to database"))
+  .catch((err) => console.log(`Error: ${err}`));
+
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-app.use(signUpRouter);
-app.use(logInRouter);
-app.use(productsRouter);
-app.use(deleteAcctRouter);
-app.use(updateCartRouter);
-app.use(userExistsRouter);
-app.use(fetchUserRouter);
+app.use(routers);
 
 app.get("/", (req, res) => {
   res.status(200).json("OK");

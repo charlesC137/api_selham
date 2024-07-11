@@ -4,8 +4,6 @@ const router = express.Router();
 const hashpass = require("../utils/password-methods");
 const dataMng = require("../utils/data-manager");
 
-let users;
-
 router.get("/api/login", (req, res) => {
   res.sendStatus(200);
 });
@@ -23,7 +21,7 @@ router.post("/api/login", validateBody, (req, res) => {
 });
 
 async function validateBody(req, res, next) {
-  users = await dataMng.fetchUsersAsync();
+  const users = await dataMng.fetchUsersAsync();
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const usernameRegex = /^\w+/;
