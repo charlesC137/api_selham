@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
-require("dotenv").config();
+require("dotenv").config(); // allows you to use process.env
 
 const routes = require("./routes/index");
-const axios = require("axios");
+const axios = require("axios"); // ion know man i just used it for the loop at the end of this code
 
 const port = process.env.PORT || 3000;
 
@@ -32,14 +32,16 @@ app.options("/api/*", (req, res) => {
   res.send();
 });
 
+//the above app.use / app.options allow for CORS requests
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to database"))
   .catch((err) => console.log(`Error: ${err}`));
 
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.static("public")); //for ejs nd stuff
+app.use(express.urlencoded({ extended: true })); //for parsing requests made to the server
+app.use(express.json()); // same as above. to be safe use both
 app.use(routes);
 
 app.get("/", (req, res) => {
